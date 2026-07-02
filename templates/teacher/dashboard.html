@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ current_user.full_name }}</h2>
+
+<div class="dashboard-grid">
+    <div class="card stat-card">
+        <h3>{{ pending_count }}</h3>
+        <p>Pending Enquiries (unclaimed)</p>
+        <a href="{{ url_for('teacher.enquiries') }}" class="btn btn-primary">View Enquiries</a>
+    </div>
+
+    <div class="card stat-card">
+        <h3>{{ my_conversations_count }}</h3>
+        <p>Conversations Assigned to You</p>
+        <a href="{{ url_for('teacher.enquiries') }}" class="btn btn-secondary">View Mine</a>
+    </div>
+
+    <div class="card stat-card">
+        <h3>{{ total_students }}</h3>
+        <p>Total Registered Students</p>
+        <a href="{{ url_for('teacher.students_list') }}" class="btn btn-secondary">View Students</a>
+    </div>
+</div>
+{% endblock %}

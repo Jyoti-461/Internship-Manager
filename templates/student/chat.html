@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Chat Support{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-page">
+    <h2>Chat Support</h2>
+    <p id="chatStatusBanner" class="chat-status-banner">Connecting...</p>
+
+    <div class="chat-window" id="chatWindow">
+        <!-- messages injected by chatbot.js -->
+    </div>
+
+    <form id="chatForm" class="chat-input-form">
+        <input type="text" id="chatInput" placeholder="Type your question..." autocomplete="off" required>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+    const CURRENT_USER = {
+        id: {{ current_user.id }},
+        role: "{{ current_user.role }}"
+    };
+</script>
+<script src="{{ url_for('static', filename='js/socket_client.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+{% endblock %}

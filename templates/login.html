@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Login</h2>
+
+    <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+        <div class="role-tabs">
+            <label class="role-tab">
+                <input type="radio" name="role" value="student" checked>
+                <span>Student</span>
+            </label>
+            <label class="role-tab">
+                <input type="radio" name="role" value="teacher">
+                <span>Teacher</span>
+            </label>
+            <label class="role-tab">
+                <input type="radio" name="role" value="admin">
+                <span>Admin</span>
+            </label>
+        </div>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <p class="auth-switch">
+        Don't have an account? <a href="{{ url_for('auth.register') }}">Register as a Student</a>
+    </p>
+    <p class="auth-note">Teacher and Admin accounts are created by the system administrator.</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

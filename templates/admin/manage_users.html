@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<h2>Manage Users</h2>
+
+<section class="form-card">
+    <h3>Create Teacher / Admin Account</h3>
+    <form method="POST" action="{{ url_for('admin.manage_users') }}">
+        <label for="full_name">Full Name *</label>
+        <input type="text" id="full_name" name="full_name" required>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="role">Role *</label>
+        <select id="role" name="role" required onchange="document.getElementById('teacherFields').style.display = this.value === 'teacher' ? 'block' : 'none'">
+            <option value="teacher">Teacher</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <div id="teacherFields">
+            <label for="department">Department</label>
+            <input type="text" id="department" name="department">
+
+            <label for="designation">Designation</label>
+            <input type="text" id="designation" name="designation">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+    </form>
+    <p class="auth-note">A temporary password will be generated. Share it securely with the new user — they'll be required to change it on first login.</p>
+</section>
+
+<section>
+    <h3>Teachers</h3>
+    <table class="data-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+        {% for t in teachers %}
+            <tr>
+                <td>{{ t.full_name }}</td>
+                <td>{{ t.email }}</td>
+                <td>{{ 'Active' if t.is_active else 'Deactivated' }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('admin.toggle_active', user_id=t.id) }}">
+                        <button type="submit" class="btn btn-small btn-secondary">
+                            {{ 'Deactivate' if t.is_active else 'Activate' }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h3>Admins</h3>
+    <table class="data-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Status</th></tr></thead>
+        <tbody>
+        {% for a in admins %}
+            <tr>
+                <td>{{ a.full_name }}</td>
+                <td>{{ a.email }}</td>
+                <td>{{ 'Active' if a.is_active else 'Deactivated' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

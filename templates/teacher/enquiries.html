@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Enquiries{% endblock %}
+
+{% block content %}
+<h2>Enquiries</h2>
+
+<section>
+    <h3>Unclaimed Enquiries (escalated by AI bot)</h3>
+    {% if unassigned %}
+        <table class="data-table">
+            <thead>
+                <tr><th>Student</th><th>Subject</th><th>Last Updated</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+            {% for conv in unassigned %}
+                <tr>
+                    <td>{{ conv.student.full_name }}</td>
+                    <td>{{ conv.subject or 'General Enquiry' }}</td>
+                    <td>{{ conv.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('teacher.claim_conversation', conversation_id=conv.id) }}">
+                            <button type="submit" class="btn btn-primary btn-small">Claim & Reply</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty-state">No unclaimed enquiries right now.</p>
+    {% endif %}
+</section>
+
+<section>
+    <h3>My Conversations</h3>
+    {% if mine %}
+        <table class="data-table">
+            <thead>
+                <tr><th>Student</th><th>Subject</th><th>Status</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+            {% for conv in mine %}
+                <tr>
+                    <td>{{ conv.student.full_name }}</td>
+                    <td>{{ conv.subject or 'General Enquiry' }}</td>
+                    <td><span class="status-badge status-{{ conv.status }}">{{ conv.status }}</span></td>
+                    <td><a href="{{ url_for('teacher.chat_reply', conversation_id=conv.id) }}" class="btn btn-secondary btn-small">Open Chat</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty-state">You haven't claimed any conversations yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

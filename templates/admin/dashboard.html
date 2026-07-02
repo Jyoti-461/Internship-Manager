@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="dashboard-grid">
+    <div class="card stat-card">
+        <h3>{{ total_students }}</h3>
+        <p>Total Students</p>
+    </div>
+    <div class="card stat-card">
+        <h3>{{ total_teachers }}</h3>
+        <p>Total Teachers</p>
+    </div>
+    <div class="card stat-card">
+        <h3>{{ pending_enquiries }}</h3>
+        <p>Pending Enquiries</p>
+    </div>
+    <div class="card stat-card">
+        <h3>{{ open_conversations }}</h3>
+        <p>Active Conversations</p>
+    </div>
+</div>
+
+<div class="admin-quick-links">
+    <a href="{{ url_for('admin.manage_users') }}" class="btn btn-primary">Manage Users</a>
+    <a href="{{ url_for('admin.analytics') }}" class="btn btn-secondary">View Analytics</a>
+    <a href="{{ url_for('admin.logs') }}" class="btn btn-secondary">Activity Logs</a>
+</div>
+{% endblock %}

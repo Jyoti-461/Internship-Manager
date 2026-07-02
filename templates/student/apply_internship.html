@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Apply for Internship{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Internship Application</h2>
+
+    <form method="POST" action="{{ url_for('student.apply_internship') }}" enctype="multipart/form-data">
+        <label for="internship_domain">Preferred Domain</label>
+        <select id="internship_domain" name="internship_domain">
+            <option value="Web Development" {% if profile and profile.internship_domain == 'Web Development' %}selected{% endif %}>Web Development</option>
+            <option value="Data Science / ML" {% if profile and profile.internship_domain == 'Data Science / ML' %}selected{% endif %}>Data Science / ML</option>
+            <option value="Cloud & DevOps" {% if profile and profile.internship_domain == 'Cloud & DevOps' %}selected{% endif %}>Cloud & DevOps</option>
+            <option value="UI/UX Design" {% if profile and profile.internship_domain == 'UI/UX Design' %}selected{% endif %}>UI/UX Design</option>
+            <option value="Digital Marketing" {% if profile and profile.internship_domain == 'Digital Marketing' %}selected{% endif %}>Digital Marketing</option>
+        </select>
+
+        <label for="year_of_study">Year of Study</label>
+        <select id="year_of_study" name="year_of_study">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="Final Year">Final Year</option>
+            <option value="Graduated">Graduated</option>
+        </select>
+
+        <label for="resume">Resume (PDF/DOC/DOCX, max 5MB)</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+        {% if profile and profile.resume_path %}
+            <small>Current file on record. Uploading a new one will replace it.</small>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>My Profile</h2>
+
+    <form method="POST" action="{{ url_for('student.profile') }}">
+        <label for="full_name">Full Name</label>
+        <input type="text" id="full_name" name="full_name" value="{{ current_user.full_name }}">
+
+        <label for="college_name">College / University</label>
+        <input type="text" id="college_name" name="college_name" value="{{ profile.college_name or '' }}">
+
+        <label for="course">Course / Branch</label>
+        <input type="text" id="course" name="course" value="{{ profile.course or '' }}">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" value="{{ profile.phone or '' }}">
+
+        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Chat with {{ conversation.student.full_name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-page">
+    <h2>Conversation with {{ conversation.student.full_name }}</h2>
+    <p class="chat-meta">Subject: {{ conversation.subject or 'General Enquiry' }} | Status: {{ conversation.status }}</p>
+
+    <div class="chat-window" id="chatWindow" data-conversation-id="{{ conversation.id }}">
+        {% for msg in conversation.messages %}
+            <div class="chat-bubble chat-bubble-{{ 'mine' if msg.sender_type == 'teacher' else 'theirs' }}">
+                <span class="chat-sender">{{ msg.sender_type }}</span>
+                <p>{{ msg.message_text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="chatForm" class="chat-input-form">
+        <input type="text" id="chatInput" placeholder="Type your reply..." autocomplete="off" required>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+    <button id="resolveBtn" class="btn btn-secondary" style="margin-top: 1rem;">Mark as Resolved</button>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+    const CURRENT_USER = { id: {{ current_user.id }}, role: "{{ current_user.role }}" };
+    const CONVERSATION_ID = {{ conversation.id }};
+</script>
+<script src="{{ url_for('static', filename='js/socket_client.js') }}"></script>
+<script src="{{ url_for('static', filename='js/teacher_dashboard.js') }}"></script>
+{% endblock %}

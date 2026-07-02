@@ -1,0 +1,99 @@
+# ========================
+# Environment & Secrets
+# ========================
+.env
+*.env
+.env.*
+!.env.example
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ========================
+# Virtual Environment
+# ========================
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# ========================
+# Flask / Instance folder
+# ========================
+instance/
+.webassets-cache
+flask_session/
+
+# ========================
+# File Uploads (user data)
+# ========================
+static/uploads/
+
+# ========================
+# Database files
+# (never commit real DB dumps with student data)
+# ========================
+*.sql.bak
+*.sqlite
+*.db
+
+# ========================
+# VS Code
+# ========================
+.vscode/
+*.code-workspace
+
+# ========================
+# Windows
+# ========================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ========================
+# macOS (if collaborating)
+# ========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ========================
+# Logs
+# ========================
+*.log
+logs/
+
+# ========================
+# pytest / testing
+# ========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ========================
+# Misc
+# ========================
+*.bak
+*.swp
+*.tmp

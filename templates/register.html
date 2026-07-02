@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Student Registration</h2>
+
+    <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form" id="registerForm">
+        <label for="full_name">Full Name *</label>
+        <input type="text" id="full_name" name="full_name" required>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="college_name">College / University</label>
+        <input type="text" id="college_name" name="college_name">
+
+        <label for="course">Course / Branch</label>
+        <input type="text" id="course" name="course" placeholder="e.g. B.Tech CSE">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password" required>
+        <small>At least 8 characters, with a letter and a number.</small>
+
+        <label for="confirm_password">Confirm Password *</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+
+    <p class="auth-switch">
+        Already have an account? <a href="{{ url_for('auth.login') }}">Login</a>
+    </p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

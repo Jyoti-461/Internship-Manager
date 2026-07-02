@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<h2>Registered Students</h2>
+
+<table class="data-table">
+    <thead>
+        <tr><th>Name</th><th>Email</th><th>College</th><th>Domain</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+    {% for user, profile in students %}
+        <tr>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ profile.college_name or '—' }}</td>
+            <td>{{ profile.internship_domain or '—' }}</td>
+            <td><span class="status-badge status-{{ profile.application_status }}">{{ profile.application_status }}</span></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<h2>Analytics</h2>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>Applications by Status</h3>
+        <table class="data-table">
+            <thead><tr><th>Status</th><th>Count</th></tr></thead>
+            <tbody>
+            {% for status, count in status_breakdown %}
+                <tr><td>{{ status }}</td><td>{{ count }}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>Enquiries by Category</h3>
+        <table class="data-table">
+            <thead><tr><th>Category</th><th>Count</th></tr></thead>
+            <tbody>
+            {% for category, count in enquiry_breakdown %}
+                <tr><td>{{ category or 'Uncategorized' }}</td><td>{{ count }}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ current_user.full_name }}</h2>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>Application Status</h3>
+        <p class="status-badge status-{{ profile.application_status }}">
+            {{ profile.application_status.replace('_', ' ').title() if profile else 'Not Applied' }}
+        </p>
+        <a href="{{ url_for('student.apply_internship') }}" class="btn btn-primary">
+            {% if profile and profile.application_status != 'not_applied' %}Update Application{% else %}Apply Now{% endif %}
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>Need Help?</h3>
+        <p>Chat with our AI assistant for instant answers about eligibility, documents, stipend, and more.</p>
+        <a href="{{ url_for('student.chat') }}" class="btn btn-secondary">Open Chat</a>
+    </div>
+
+    <div class="card">
+        <h3>Your Profile</h3>
+        <p>College: {{ profile.college_name or '—' }}</p>
+        <p>Course: {{ profile.course or '—' }}</p>
+        <a href="{{ url_for('student.profile') }}" class="btn btn-secondary">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}

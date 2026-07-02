@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Internship Portal - Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Internship Program</h1>
+    <p>Apply for an internship, track your application, and get instant help from our AI assistant.</p>
+    {% if not current_user.is_authenticated %}
+        <div class="hero-actions">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Apply as a Student</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Login</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
